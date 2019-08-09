@@ -4,7 +4,7 @@
 #
 # Distributed under terms of the MIT license.
 #
-# Desc: MassGrid process monitor script.
+# Desc: Mixin process monitor script.
 # User: Robin@ExinPool
 # Date: 2019-08-08
 # Time: 18:41:18
