@@ -9,4 +9,4 @@
 # Date: 2019-08-06
 # Time: 18:29:30
 
-nohup /usr/bin/python /data/monitor/exinpool/Mixin/mixin_blocks.py VALIDATOR mixin-node0.exinpool.com:8239 &
+nohup /usr/bin/python /data/monitor/exinpool/Mixin/monitor/mixin_blocks.py VALIDATOR mixin-node0.exinpool.com:8239 &
