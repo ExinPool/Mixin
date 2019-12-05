@@ -4,7 +4,7 @@
 
 [![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-## Table of Contents 
+## Table of Contents
 
 - [Installation](#installation)
 - [Features](#features)
@@ -88,10 +88,10 @@ Add crontab like this.
 
 ``` bash
 # Mixin Coop Node process start monitor
-0 18 * * * nohup bash /data/monitor/exinpool/Mixin/co-signer/start.sh >> /data/monitor/exinpool/Mixin/co-signer/cosigner_state.log &
+0 18 * * * nohup bash /data/monitor/exinpool/Mixin/coop/start.sh >> /data/monitor/exinpool/Mixin/coop/coop_state.log &
 
 # Mixin Coop Node process stop monitor
-0 19 * * * nohup bash /data/monitor/exinpool/Mixin/co-signer/stop.sh >> /data/monitor/exinpool/Mixin/co-signer/cosigner_state.log &
+0 19 * * * nohup bash /data/monitor/exinpool/Mixin/coop/stop.sh >> /data/monitor/exinpool/Mixin/coop/coop.log &
 ```
 
 The crontab will run every minute then you can check the log in `cosigner_state.log`.
