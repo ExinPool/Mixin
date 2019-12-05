@@ -91,7 +91,7 @@ Add crontab like this.
 0 18 * * * nohup bash /data/monitor/exinpool/Mixin/coop/start.sh >> /data/monitor/exinpool/Mixin/coop/coop_state.log &
 
 # Mixin Coop Node process stop monitor
-0 19 * * * nohup bash /data/monitor/exinpool/Mixin/coop/stop.sh >> /data/monitor/exinpool/Mixin/coop/coop.log &
+0 19 * * * nohup bash /data/monitor/exinpool/Mixin/coop/stop.sh >> /data/monitor/exinpool/Mixin/coop/coop_state.log &
 ```
 
 The crontab will run every minute then you can check the log in `cosigner_state.log`.
