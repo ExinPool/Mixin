@@ -9,39 +9,57 @@
 # Date: 2019-12-05
 # Time: 10:56:39
 
-FILE="ssmtp.log"
-LOG_FILE="cosigner_state.log"
-RECV="YOUR_EMAIL"
-SSMTP="/usr/sbin/ssmtp"
-PROCESS="co-signer"
-PROCESS_NUM=1
-SERVICE="Mixin Coop"
+# load the config library functions
+source config.shlib
 
-sendMail() {
-    echo -n "" > $FILE
-    echo "To: $RECV" >> $FILE
-    echo "From: $RECV" >> $FILE
-    echo "Subject: ${SERVICE} Node Monitor" >> $FILE
-    echo "" >> $FILE
-}
+# load configuration
+service="$(config_get SERVICE)"
+process="$(config_get PROCESS)"
+process_num="$(config_get PROCESS_NUM)"
+process_num_var=`ps -ef | grep ${process} | grep -v grep | wc -l`
+log_file="$(config_get LOG_FILE)"
+webhook_url="$(config_get WEBHOOK_URL)"
+access_token="$(config_get ACCESS_TOKEN)"
 
-process=`ps -ef | grep ${PROCESS} | grep -v grep | wc -l`
-
-if [ $process -eq ${PROCESS_NUM} ]
+if [ ${process_num} -eq ${process_num_var} ]
 then
-    ps -ef | grep ${PROCESS} | grep -v grep | awk '{print $2}' | xargs kill -9
+    ps -ef | grep ${process} | grep -v grep | awk '{print $2}' | xargs kill -9
     if [ $? -eq 0 ]
     then
-        LOG="`date '+%Y-%m-%d %H:%M:%S'` `hostname` `whoami` INFO ${SERVICE} co-signer stop successfully."
-        echo $LOG >> $LOG_FILE
-        sendMail
-        echo $LOG >> $FILE
-        $SSMTP $RECV < $FILE
+        log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} co-signer stop successfully."
+        echo $log >> $log_file
+        curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' > /dev/null 2>&1
+        if [ $? -eq 0 ]
+        then
+            log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin successfully."
+            echo $log >> $log_file
+        else
+            log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin failed."
+            echo $log >> $log_file
+        fi
     else
-        LOG="`date '+%Y-%m-%d %H:%M:%S'` `hostname` `whoami` INFO ${SERVICE} co-signer stop failed."
-        echo $LOG >> $LOG_FILE
+        log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} co-signer stop failed."
+        echo $log >> $log_file
+        curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' > /dev/null 2>&1
+        if [ $? -eq 0 ]
+        then
+            log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin successfully."
+            echo $log >> $log_file
+        else
+            log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin failed."
+            echo $log >> $log_file
+        fi
     fi
 else
-    LOG="`date '+%Y-%m-%d %H:%M:%S'` `hostname` `whoami` ERROR ${SERVICE} co-signer is already stoped."
-    echo $LOG >> $LOG_FILE
+    log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` ERROR ${service} co-signer is already stoped."
+    echo $log >> $log_file
+    curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' > /dev/null 2>&1
+    if [ $? -eq 0 ]
+    then
+        log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin successfully."
+        echo $log >> $log_file
+    else
+        log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin failed."
+        echo $log >> $log_file
+    fi
 fi

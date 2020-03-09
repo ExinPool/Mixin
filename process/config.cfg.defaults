@@ -1,0 +1,6 @@
+SERVICE=PRESSone
+REMOTE_NODE=http://51.68.201.144:8888
+LOCAL_NODE=http://127.0.0.1:8888
+LOG_FILE=prs_blocks.log
+WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
+ACCESS_TOKEN=YOUR_ACCESS_TOKEN
