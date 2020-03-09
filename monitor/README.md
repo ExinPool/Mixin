@@ -17,6 +17,11 @@
 ## Installation
 
 - Python 2.7+ required
+- pyyaml required
+
+``` bash
+pip install pyyaml
+```
 
 ### Clone
 
