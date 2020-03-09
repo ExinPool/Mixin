@@ -1,3 +1,4 @@
 process/config.cfg
 coop/config.cfg
 .DS_Store
+monitor/config.yml
