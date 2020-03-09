@@ -41,9 +41,28 @@ Invite Webhook and somebody who want to receive monitor message to a small group
 
 > Note: The access token is only available for the owner of the group.
 
-Change node url in `mixin_blocks_crontab.sh`.
+Then copy `config.template.yml` to `config.yml` add update this yaml configuration.
 
-And then update `access_token` in the `mixin_blocks.py`.
+``` yaml
+node_name: "ExinPool"
+log_file: "mixin_blocks.log"
+webhook:
+  webhook_url: "https://webhook.exinwork.com/api/send?access_token={}"
+  access_token: ""
+node:
+  api_url: "http://api.mixinwallet.com/getinfo?node="
+  node_tag: ""
+  local_node: ""
+  remote_node_1: "mixin-node0.exinpool.com:8239"
+  remote_node_2: "node-42.f1ex.io:1443"
+mail:
+  sender: ""
+  password: ""
+  receiver: ""
+  subject: "Mixin Monitor"
+  smtp_url: "smtp.exmail.qq.com"
+  smtp_port: 465
+```
 
 Finally, add crontab like this in the server.
 
