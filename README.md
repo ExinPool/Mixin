@@ -16,17 +16,17 @@
 
 # Explanation
 
-* coop: Mixin coop multi-sign service monitor.
-* monitor: Mixin blocks sync status monitor.
-* process: Mixin service process monitor.
+* coop: Mixin coop multi-sign service monitor
+* monitor: Mixin blocks sync status monitor
+* process: Mixin service process monitor
 
 Read the `README` in each folder.
 
 ## Features
 
 - Monitor Mixin cop multi-sign service
-- Monitor blocks sync status.
-- Monitor Mixin service process.
+- Monitor blocks sync status
+- Monitor Mixin service process
 - Send alarm message via Webhook which based on Mixin API
 
 ## Contributing
