@@ -4,7 +4,7 @@
 
 [![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-## Table of Contents 
+## Table of Contents
 
 - [Installation](#installation)
 - [Features](#features)
@@ -23,22 +23,24 @@
 - Clone this repo to your server using:
 
 ``` bash
-cd /data/ExinPool && git clone https://github.com/ExinPool/Mixin
+sudo mkdir -p /data/monitor/exinpool
+cd /data/monitor/exinpool
+sudo git clone https://github.com/ExinPool/Mixin
 ```
 
 ### Setup
 
-Change QQ mail configurations in `send_mail` function.
+Search `7000000012` in [Mixin Messenger](https://mixin.one/messenger) and add **[Webhook](https://mixin.one/codes/4d792128-1db8-4baf-8d90-d0d8189a4a7e)** as contact.
 
-``` bash
-    sender='xxxxxxxx'
-    password = 'xxxxxxxx'
-    receiver='xxxxxxxx'
-```
+Invite Webhook and somebody who want to receive monitor message to a small group in Mixin Messenger. Open Webhook in the group, you can see the access token.
+
+> Note: The access token is only available for the owner of the group.
 
 Change node url in `mixin_blocks_crontab.sh`.
 
-Finally, add crontab like this.
+And then update `access_token` in the `mixin_blocks.py`.
+
+Finally, add crontab like this in the server.
 
 ``` bash
 * * * * * nohup bash /data/ExinPool/Mixin/monitor/mixin_blocks_crontab.sh &
@@ -46,12 +48,13 @@ Finally, add crontab like this.
 
 The crontab will run every minutes then you can check the log in `/home/${YOUR_USER}/mixin_blocks.log`.
 
-When the node is not full sync with the remote node, you can receive QQ email. It's highly recommended bind the QQ email with WeChat, then you can receive the alarm email in time.
+When the node is not full sync with the remote node, you can receive message in the Mixin Messenger.
 
 ## Features
 
 - Monitor multiple node like validator, sync and backup
-- Alarm by QQ email when node is abnormal
+- Send alarm message when node is not full sync
+- Send alarm message via Webhook which based on Mixin API
 
 ## Contributing
 
