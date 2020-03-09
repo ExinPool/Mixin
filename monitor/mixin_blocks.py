@@ -32,8 +32,8 @@ def log_config():
 
 def send_mixin(content):
     value = {'category':'PLAIN_TEXT', 'data':content}
-    webhook_url = config["webhook"].["webhook_url"]
-    access_token = config["webhook"].["access_token"]
+    webhook_url = config["webhook"]["webhook_url"]
+    access_token = config["webhook"]["access_token"]
     response = requests.post(webhook_url.format(access_token), data=value)
     if response.status_code == 200:
         logging.info("Send mixin successfully.")
@@ -42,12 +42,12 @@ def send_mixin(content):
 
 def send_mail(content):
     node_name = config["node_name"]
-    sender = config["mail"].["sender"]
-    password = config["mail"].["password"]
-    receiver = config["mail"].["receiver"]
-    subject = config["mail"].["subject"]
-    smtp_url = config["mail"].["smtp_url"]
-    smtp_port = config["mail"].["smtp_port"]
+    sender = config["mail"]["sender"]
+    password = config["mail"]["password"]
+    receiver = config["mail"]["receiver"]
+    subject = config["mail"]["subject"]
+    smtp_url = config["mail"]["smtp_url"]
+    smtp_port = config["mail"]["smtp_port"]
 
     ret = True
 
@@ -70,7 +70,7 @@ def send_mail(content):
         logging.error("Mail send failed")
 
 def check_node(node):
-    api_url = config["node"].["api_url"]
+    api_url = config["node"]["api_url"]
     response = requests.get(api_url + node)
     data = json.loads(response.text)
     height = data['data']['graph']['topology']
@@ -78,10 +78,10 @@ def check_node(node):
     return height
 
 def check_sync():
-    node_tag = config["node"].["node_tag"]
-    local_node = config["node"].["local_node"]
-    remote_node_1 = config["node"].["remote_node_1"]
-    remote_node_2 = config["node"].["remote_node_2"]
+    node_tag = config["node"]["node_tag"]
+    local_node = config["node"]["local_node"]
+    remote_node_1 = config["node"]["remote_node_1"]
+    remote_node_2 = config["node"]["remote_node_2"]
 
     localHeight = check_node(local_node)
     remoteHeight1 = check_node(remote_node_1)
