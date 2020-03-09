@@ -15,14 +15,14 @@ source config.shlib
 # load configuration
 service="$(config_get SERVICE)"
 process="$(config_get PROCESS)"
-process_num="$(config_get PROCESS_NUM)"
+process_start_num="$(config_get PROCESS_START_NUM)"
 process_num_var=`ps -ef | grep ${process} | grep -v grep | wc -l`
 coop_dir="$(config_get COOP_DIR)"
 log_file="$(config_get LOG_FILE)"
 webhook_url="$(config_get WEBHOOK_URL)"
 access_token="$(config_get ACCESS_TOKEN)"
 
-if [ ${process_num} -eq ${process_num_var} ]
+if [ ${process_start_num} -eq ${process_num_var} ]
 then
     cd ${coop_dir} && nohup ./co-signer >> co-signer.log &
     if [ $? -eq 0 ]

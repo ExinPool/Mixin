@@ -15,13 +15,13 @@ source config.shlib
 # load configuration
 service="$(config_get SERVICE)"
 process="$(config_get PROCESS)"
-process_num="$(config_get PROCESS_NUM)"
+process_stop_num="$(config_get PROCESS_STOP_NUM)"
 process_num_var=`ps -ef | grep ${process} | grep -v grep | wc -l`
 log_file="$(config_get LOG_FILE)"
 webhook_url="$(config_get WEBHOOK_URL)"
 access_token="$(config_get ACCESS_TOKEN)"
 
-if [ ${process_num} -eq ${process_num_var} ]
+if [ ${process_stop_num} -eq ${process_num_var} ]
 then
     ps -ef | grep ${process} | grep -v grep | awk '{print $2}' | xargs kill -9
     if [ $? -eq 0 ]
