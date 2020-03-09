@@ -4,7 +4,7 @@
 
 [![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-## Table of Contents 
+## Table of Contents
 
 - [Installation](#installation)
 - [Features](#features)
@@ -31,60 +31,37 @@ sudo git clone https://github.com/ExinPool/Mixin
 
 ### Setup
 
-Install related dependencies.
+Search `7000000012` in [Mixin Messenger](https://mixin.one/messenger) and add **[Webhook](https://mixin.one/codes/4d792128-1db8-4baf-8d90-d0d8189a4a7e)** as contact.
+
+Invite Webhook and somebody who want to receive monitor message to a small group in Mixin Messenger. Open Webhook in the group, you can see the access token.
+
+> Note: The access token is only available for the owner of the group.
+
+Copy `config.cfg.defaults` to `config.cfg` and change some varibles like this in the `config.cfg`.
 
 ``` bash
-sudo apt-get -y install ssmtp
+SERVICE=Mixin
+PROCESS=mixin
+PROCESS_NUM=1
+LOG_FILE=mixin_process.log
+WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
+ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 ```
 
-Update `ssmtp.conf`.
+Add crontab like this in the server.
 
 ``` bash
-sudo vim /etc/ssmtp/ssmtp.conf
-
-sudo grep "^#" -v /etc/ssmtp/ssmtp.conf
+# Mixin Coop process monitor
+* * * * * cd /data/monitor/exinpool/Mixin/process && bash mixin_process.sh >> mixin_process.log &
 ```
 
-The `ssmtp.conf` like this.
-
-``` bash
-root=YOUR_EMAIL
-
-mailhub=smtp.exmail.qq.com:465
-
-rewriteDomain=qq.com
-AuthUser=YOUR_EMAIL
-AuthPass=YOUR_PASSWORD
-FromLineOverride=YES
-UseTLS=YES
-```
-
-Change some varibles like.
-
-``` bash
-FILE="ssmtp.log"
-LOG_FILE="process_state.log"
-RECV="YOUR_EMAIL"
-SSMTP="/usr/sbin/ssmtp"
-PROCESS="Mixind"
-PROCESS_NUM=2
-SERVICE="Mixin"
-```
-
-Add crontab like this.
-
-``` bash
-# Mixin node process monitor
-* * * * * nohup bash /data/monitor/exinpool/Mixin/process/mixin_process.sh >> /data/monitor/exinpool/Mixin/process/mixin_process.log &
-```
-
-The crontab will run every minute then you can check the log in `mixin_process.log`.
+The crontab will run every minute then you can check the log in the `mixin_process.log`.
 
 ## Features
 
 - Monitor Mixin node process
-- Send alarm email when node is abnormal
-- Send email via ssmtp and QQ email
+- Send alarm message when node is abnormal
+- Send alarm message via Webhook which based on Mixin API
 
 ## Contributing
 
