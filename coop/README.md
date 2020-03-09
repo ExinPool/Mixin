@@ -39,6 +39,16 @@ Invite Webhook and somebody who want to receive monitor message to a small group
 
 Copy `config.cfg.defaults` to `config.cfg` and change some varibles like this in the `config.cfg`.
 
+``` bash
+SERVICE=Mixin-Coop
+PROCESS=co-signer
+PROCESS_NUM=1
+COOP_DIR=/home/ubuntu/go/src/github.com/fox-one/mint-withdraw/co-signer
+LOG_FILE=cosigner_state.log
+WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
+ACCESS_TOKEN=YOUR_ACCESS_TOKEN
+```
+
 Add crontab like this in the server.
 
 ``` bash
