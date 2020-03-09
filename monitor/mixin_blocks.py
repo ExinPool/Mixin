@@ -24,6 +24,7 @@ NODE_TAG = sys.argv[1]
 LOCAL_NODE = sys.argv[2]
 REMOTE_NODE_1 = "mixin-node0.exinpool.com:8239"
 REMOTE_NODE_2 = "node-42.f1ex.io:1443"
+access_token = ""
 
 def log_config():
     logging.basicConfig(filename="mixin_blocks.log",
@@ -31,6 +32,14 @@ def log_config():
                                 format='%(asctime)s.%(msecs)d %(name)s %(levelname)s %(message)s',
                                 datefmt='%Y-%m-%d %H:%M:%S',
                                 level=logging.DEBUG)
+
+def send_mixin(content):
+    value = {'category':'PLAIN_TEXT', 'data':content}
+    response = requests.post("https://webhook.exinwork.com/api/send?access_token={}".format(access_token), data=value)
+    if response.status_code == 200:
+        logging.info("Send mixin successfully.")
+    else:
+        logging.info("Send mixin failed.")
 
 def send_mail(content):
     sender='xxxxxxxx'
@@ -53,9 +62,9 @@ def send_mail(content):
         ret = False
 
     if ret:
-        logging.info("邮件发送成功")
+        logging.info("Mail send successfully")
     else:
-        logging.error("邮件发送失败")
+        logging.error("Mail send failed")
 
 def check_node(node):
     response = requests.get("https://api.mixinwallet.com/getinfo?node=" + node)
@@ -76,7 +85,7 @@ def check_sync():
             logging.info("Mixin " + NODE_TAG + " Node: " + LOCAL_NODE + " is full sync.")
         else:
             logging.error("Mixin " + NODE_TAG + " Node: " + LOCAL_NODE + " is not full sync.")
-            send_mail("Mixin " + NODE_TAG + " Node: " + LOCAL_NODE + " is not full sync.")
+            send_mixin("Mixin " + NODE_TAG + " Node: " + LOCAL_NODE + " is not full sync.")
 
 def main():
     log_config()
