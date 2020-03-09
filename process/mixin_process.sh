@@ -23,10 +23,10 @@ access_token="$(config_get ACCESS_TOKEN)"
 
 if [ ${process_num} -eq ${process_num_var} ]
 then
-    log="`date '+%Y-%m-%d %H:%M:%S'` `hostname` `whoami` INFO ${service} node process is normal."
+    log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} node process is normal."
     echo $log >> $log_file
 else
-    log="`date '+%Y-%m-%d %H:%M:%S'` `hostname` `whoami` ERROR ${service} node process is abnormal."
+    log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` ERROR ${service} node process is abnormal."
     echo $log >> $log_file
     curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' > /dev/null 2>&1
     if [ $? -eq 0 ]
