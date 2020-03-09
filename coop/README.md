@@ -31,76 +31,31 @@ sudo git clone https://github.com/ExinPool/Mixin
 
 ### Setup
 
-Install related dependencies.
+Search `7000000012` in [Mixin Messenger](https://mixin.one/messenger) and add **[Webhook](https://mixin.one/codes/4d792128-1db8-4baf-8d90-d0d8189a4a7e)** as contact.
 
-``` bash
-sudo apt-get -y install ssmtp
-```
+Invite Webhook and somebody who want to receive monitor message to a small group in Mixin Messenger. Open Webhook in the group, you can see the access token.
 
-Update `ssmtp.conf`.
+> Note: The access token is only available for the owner of the group.
 
-``` bash
-sudo vim /etc/ssmtp/ssmtp.conf
+Copy `config.cfg.defaults` to `config.cfg` and change some varibles like this in the `config.cfg`.
 
-sudo grep "^#" -v /etc/ssmtp/ssmtp.conf
-```
-
-The `ssmtp.conf` like this.
-
-``` bash
-root=YOUR_EMAIL
-
-mailhub=smtp.exmail.qq.com:465
-
-rewriteDomain=qq.com
-AuthUser=YOUR_EMAIL
-AuthPass=YOUR_PASSWORD
-FromLineOverride=YES
-UseTLS=YES
-```
-
-Change some varibles like in `start.sh`.
-
-``` bash
-FILE="ssmtp.log"
-LOG_FILE="cosigner_state.log"
-RECV="YOUR_EMAIL"
-SSMTP="/usr/sbin/ssmtp"
-PROCESS="co-signer"
-PROCESS_NUM=0
-SERVICE="Mixin Coop"
-DIR="/home/ubuntu/go/src/github.com/fox-one/mint-withdraw/co-signer"
-```
-
-Change some varibles like in `stop.sh`.
-
-``` bash
-FILE="ssmtp.log"
-LOG_FILE="cosigner_state.log"
-RECV="YOUR_EMAIL"
-SSMTP="/usr/sbin/ssmtp"
-PROCESS="co-signer"
-PROCESS_NUM=1
-SERVICE="Mixin Coop"
-```
-
-Add crontab like this.
+Add crontab like this in the server.
 
 ``` bash
 # Mixin Coop Node process start monitor
-0 18 * * * nohup bash /data/monitor/exinpool/Mixin/coop/start.sh >> /data/monitor/exinpool/Mixin/coop/coop_state.log &
+0 10 * * * cd /data/monitor/exinpool/Mixin/coop && bash start.sh >> cosigner_state.log &
 
 # Mixin Coop Node process stop monitor
-0 19 * * * nohup bash /data/monitor/exinpool/Mixin/coop/stop.sh >> /data/monitor/exinpool/Mixin/coop/coop_state.log &
+0 11 * * * cd /data/monitor/exinpool/Mixin/coop && bash stop.sh >> cosigner_state.log &
 ```
 
-The crontab will run every minute then you can check the log in `cosigner_state.log`.
+The crontab will run every minute then you can check the log in the `cosigner_state.log`.
 
 ## Features
 
 - Monitor Mixin Coop node process
-- Send alarm email when node is started or stoped
-- Send email via ssmtp and QQ email
+- Send alarm message when node is started or stoped
+- Send alarm message via Webhook which based on Mixin API
 
 ## Contributing
 
