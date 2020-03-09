@@ -48,6 +48,7 @@ And then update `access_token` in the `mixin_blocks.py`.
 Finally, add crontab like this in the server.
 
 ``` bash
+# Mixin node status monitor
 * * * * * nohup bash /data/ExinPool/Mixin/monitor/mixin_blocks_crontab.sh &
 ```
 
