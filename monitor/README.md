@@ -68,7 +68,7 @@ Finally, add crontab like this in the server.
 
 ``` bash
 # Mixin node status monitor
-* * * * * nohup bash /data/ExinPool/Mixin/monitor/mixin_blocks_crontab.sh &
+* * * * * nohup bash /data/monitor/exinpool/Mixin/monitor/mixin_blocks_crontab.sh &
 ```
 
 The crontab will run every minutes then you can check the log in `/home/${YOUR_USER}/mixin_blocks.log`.
