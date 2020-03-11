@@ -14,7 +14,7 @@
 - [Support](#support)
 - [License](#license)
 
-# Explanation
+## Explanation
 
 * coop: Mixin coop multi-sign service monitor
 * monitor: Mixin blocks sync status monitor
