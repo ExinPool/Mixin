@@ -41,7 +41,7 @@ Copy `config.cfg.defaults` to `config.cfg` and change some varibles like this in
 
 ``` bash
 SERVICE=Mixin
-PROCESS=mixin
+PROCESS=7239
 PROCESS_NUM=1
 LOG_FILE=mixin_process.log
 WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
