@@ -20,7 +20,8 @@
 - pyyaml required
 
 ``` bash
-pip install pyyaml
+$ apt-get -y install python python-pip
+$ pip install requests pyyaml
 ```
 
 ### Clone
@@ -28,9 +29,9 @@ pip install pyyaml
 - Clone this repo to your server using:
 
 ``` bash
-sudo mkdir -p /data/monitor/exinpool
-cd /data/monitor/exinpool
-sudo git clone https://github.com/ExinPool/Mixin
+$ sudo mkdir -p /data/monitor/exinpool
+$ cd /data/monitor/exinpool
+$ sudo git clone https://github.com/ExinPool/Mixin
 ```
 
 ### Setup

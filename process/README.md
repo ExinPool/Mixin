@@ -24,9 +24,9 @@
 - Clone this repo to your server using:
 
 ``` bash
-sudo mkdir -p /data/monitor/exinpool
-cd /data/monitor/exinpool
-sudo git clone https://github.com/ExinPool/Mixin
+$ sudo mkdir -p /data/monitor/exinpool
+$ cd /data/monitor/exinpool
+$ sudo git clone https://github.com/ExinPool/Mixin
 ```
 
 ### Setup
@@ -51,7 +51,7 @@ ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 Add crontab like this in the server.
 
 ``` bash
-# Mixin Coop process monitor
+# Mixin node process monitor
 * * * * * cd /data/monitor/exinpool/Mixin/process && bash mixin_process.sh >> mixin_process.log &
 ```
 
