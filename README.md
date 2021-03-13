@@ -19,6 +19,7 @@
 * coop: Mixin coop multi-sign service monitor
 * monitor: Mixin blocks sync status monitor
 * process: Mixin service process monitor
+* works: Mixin node works monitor
 
 Read the `README` in each folder.
 
