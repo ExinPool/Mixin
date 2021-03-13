@@ -27,6 +27,7 @@
 $ sudo mkdir -p /data/monitor/exinpool
 $ cd /data/monitor/exinpool
 $ sudo git clone https://github.com/ExinPool/Mixin
+$ sudo apt -y install jq
 ```
 
 ### Setup
