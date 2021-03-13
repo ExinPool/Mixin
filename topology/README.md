@@ -54,7 +54,7 @@ Add crontab like this in the server.
 
 ``` bash
 # Mixin node topology monitor
-*/30 * * * * cd /data/monitor/exinpool/Mixin/topology && bash mixin_topology.sh >> mixin_topology.log &
+0 * * * * cd /data/monitor/exinpool/Mixin/topology && bash mixin_topology.sh >> mixin_topology.log &
 ```
 
 The crontab will run every minute then you can check the log in the `mixin_topology.log`.

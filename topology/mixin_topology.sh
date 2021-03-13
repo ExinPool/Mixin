@@ -25,7 +25,7 @@ topology_first=`$mixin -n $host getinfo | jq '.' | grep topology | awk -F":" '{p
 log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO topology: ${topology_first}"
 echo $log >> $log_file
 
-sleep 1200
+sleep 1800
 
 topology_second=`$mixin -n $host getinfo | jq '.' | grep topology | awk -F":" '{print $2}' | sed "s/ //g"`
 log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO topology: ${topology_second}"
