@@ -46,6 +46,7 @@ then
         log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin failed."
         echo $log >> $log_file
     fi
+    sudo systemctl restart mixin.service
 else
     log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} $host status is normal."
     echo $log >> $log_file
