@@ -54,7 +54,7 @@ Add crontab like this in the server.
 
 ``` bash
 # Mixin node works monitor
-* * * * * cd /data/monitor/exinpool/Mixin/works && bash mixin_works.sh >> mixin_works.log &
+*/15 * * * * cd /data/monitor/exinpool/Mixin/works && bash mixin_works.sh >> mixin_works.log &
 ```
 
 The crontab will run every minute then you can check the log in the `mixin_works.log`.
