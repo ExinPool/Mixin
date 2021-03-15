@@ -34,7 +34,7 @@ echo $log >> $log_file
 if [ ${topology_first} -eq ${topology_second} ]
 then
     log="时间: `date '+%Y-%m-%d %H:%M:%S'` UTC \n 主机名: `hostname` \n 节点: $host \n 第一次 topology: ${topology_first} \n 第二次 topology: ${topology_second} \n 状态: 10 分钟没变化，已重启节点"
-    echo $log >> $log_file
+    echo -e $log >> $log_file
     success=`curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' | awk -F',' '{print $1}' | awk -F':' '{print $2}'`
     if [ "$success" = "true" ]
     then
