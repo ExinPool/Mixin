@@ -33,7 +33,7 @@ echo $log >> $log_file
 local_first=$((local_topology - remote_first_topology))
 local_second=$((local_topology - remote_second_topology))
 
-if [ ${local_first#-} -gt $ ${abs_num} ] && [ ${local_second#-} -gt $ ${abs_num} ]
+if [ ${local_first#-} -gt ${abs_num} ] && [ ${local_second#-} -gt ${abs_num} ]
 then
     log="时间: `date '+%Y-%m-%d %H:%M:%S'` UTC \n 主机名: `hostname` \n 节点: $host, ${local_topology} \n 远端节点 1: ${remote_host_first}, ${remote_first_topology} \n 远端节点 2: ${remote_host_second}, ${remote_second_topology} \n 状态: 节点数据不同步。"
     echo -e $log >> $log_file
