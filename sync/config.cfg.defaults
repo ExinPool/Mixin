@@ -1,0 +1,10 @@
+SERVICE=Mixin
+HOST=
+REMOTE_HOST_FIRST=node-42.f1ex.io:8239
+REMOTE_HOST_SECOND=mixin-node-01.b1.run:8239
+ABS_NUM=100
+NODE_ID=
+MIXIN=/data/exinpool/mixin/mixin
+LOG_FILE=mixin_sync.log
+WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
+ACCESS_TOKEN=YOUR_ACCESS_TOKEN
