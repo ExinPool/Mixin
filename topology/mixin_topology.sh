@@ -25,7 +25,7 @@ topology_first=`$mixin -n $host getinfo | jq '.' | grep topology | awk -F":" '{p
 log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO topology: ${topology_first}"
 echo $log >> $log_file
 
-sleep 1800
+sleep 600
 
 topology_second=`$mixin -n $host getinfo | jq '.' | grep topology | awk -F":" '{print $2}' | sed "s/ //g"`
 log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO topology: ${topology_second}"
@@ -33,7 +33,7 @@ echo $log >> $log_file
 
 if [ ${topology_first} -eq ${topology_second} ]
 then
-    log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` ERROR ${service} $host status is abnormal, topologys for more than 20 minutes without change."
+    log="时间: `date '+%Y-%m-%d %H:%M:%S'` UTC \n 主机名: `hostname` \n 节点: $host \n 第一次 topology: ${topology_first} \n 第二次 topology: ${topology_second} \n 状态: 10 分钟没变化，已重启节点"
     echo $log >> $log_file
     success=`curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' | awk -F',' '{print $1}' | awk -F':' '{print $2}'`
     if [ "$success" = "true" ]
