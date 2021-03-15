@@ -16,7 +16,7 @@ source config.shlib
 service="$(config_get SERVICE)"
 process="$(config_get PROCESS)"
 process_num="$(config_get PROCESS_NUM)"
-process_num_var=`ps -ef | grep -w ${process} | grep -v grep | wc -l`
+process_num_var=`sudo netstat -langput | grep LISTEN | grep $process | wc -l`
 log_file="$(config_get LOG_FILE)"
 webhook_url="$(config_get WEBHOOK_URL)"
 access_token="$(config_get ACCESS_TOKEN)"
@@ -26,8 +26,8 @@ then
     log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} node process is normal."
     echo $log >> $log_file
 else
-    log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` ERROR ${service} node process is abnormal."
-    echo $log >> $log_file
+    log="时间: `date '+%Y-%m-%d %H:%M:%S'` UTC \n 主机名: `hostname` \n 状态: 进程不存在。"
+    echo -e $log >> $log_file
     success=`curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' | awk -F',' '{print $1}' | awk -F':' '{print $2}'`
     if [ "$success" = "true" ]
     then
