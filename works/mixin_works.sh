@@ -37,7 +37,7 @@ echo $log >> $log_file
 
 if [ ${works_first} -eq ${works_second} ]
 then
-    log="时间: `date '+%Y-%m-%d %H:%M:%S'` UTC \n 主机名: `hostname` \n 节点: $host \n 第一次 works 累计: ${works_first} \n 第二次 works 累计: ${works_second} \n 状态: 10 分钟没变化，已重启节点"
+    log="时间: `date '+%Y-%m-%d %H:%M:%S'` UTC \n 主机名: `hostname` \n 节点: $host \n 第一次 works 累计: ${works_first} \n 第二次 works 累计: ${works_second} \n 状态: works 10 分钟没变化。"
     echo -e $log >> $log_file
     success=`curl ${webhook_url}=${access_token} -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$log"'"}' | awk -F',' '{print $1}' | awk -F':' '{print $2}'`
     if [ "$success" = "true" ]
@@ -48,7 +48,6 @@ then
         log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO send mixin failed."
         echo $log >> $log_file
     fi
-    sudo systemctl restart mixin.service
 else
     log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} $host status is normal."
     echo $log >> $log_file
