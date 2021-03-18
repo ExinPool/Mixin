@@ -21,16 +21,16 @@ log_file="$(config_get LOG_FILE)"
 webhook_url="$(config_get WEBHOOK_URL)"
 access_token="$(config_get ACCESS_TOKEN)"
 
-leader_works_first=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 10 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '1p' | sed "s/ //g"`
-signer_works_first=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 10 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '2p' | sed "s/ //g"`
+leader_works_first=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 7 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '1p' | sed "s/ //g"`
+signer_works_first=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 7 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '2p' | sed "s/ //g"`
 works_first=$((leader_works_first + signer_works_first))
 log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO leader_works: ${leader_works_first}, signer_works: ${signer_works_first}, works_first: ${works_first}"
 echo $log >> $log_file
 
 sleep 600
 
-leader_works_second=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 10 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '1p' | sed "s/ //g"`
-signer_works_second=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 10 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '2p' | sed "s/ //g"`
+leader_works_second=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 7 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '1p' | sed "s/ //g"`
+signer_works_second=`curl -s http://api.mixinwallet.com/getinfo | jq '.' | grep ${node_id} -A 7 | grep works -A 2 | grep -v works | sed "s/,//g" | sed -n '2p' | sed "s/ //g"`
 works_second=$((leader_works_second + signer_works_second))
 log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO leader_works: ${leader_works_second}, signer_works: ${signer_works_second}, works_second: ${works_second}"
 echo $log >> $log_file
