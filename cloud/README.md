@@ -51,7 +51,7 @@ ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 Add crontab like this in the server.
 
 ``` bash
-# Mixin node process monitor
+# Mixin cloud monitor
 * * * * * cd /data/monitor/exinpool/Mixin/cloud && bash cloud_monitor.sh >> cloud_monitor.log &
 ```
 
