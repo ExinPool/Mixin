@@ -52,7 +52,7 @@ Add crontab like this in the server.
 
 ``` bash
 # Mixin cloud monitor
-* * * * * cd /data/monitor/exinpool/Mixin/cloud && bash cloud_monitor.sh >> cloud_monitor.log &
+*/5 * * * * cd /data/monitor/exinpool/Mixin/cloud && bash cloud_monitor.sh >> cloud_monitor.log &
 ```
 
 The crontab will run every minute then you can check the log in the `cloud_monitor.log`.
