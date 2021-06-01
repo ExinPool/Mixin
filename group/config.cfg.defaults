@@ -8,6 +8,6 @@ FCOIN_PROCESS=fcoin
 LOCALCN_PROCESS=localcn
 LOCALEN_PROCESS=localen
 LOCALD_PROCESS=locald
-LOG_FILE=mixin_group_process.log
+LOG_FILE=group_process.log
 WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
 ACCESS_TOKEN=YOUR_ACCESS_TOKEN

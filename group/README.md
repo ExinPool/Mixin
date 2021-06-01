@@ -1,6 +1,6 @@
-# Mixin Node Process Monitor
+# Mixin Group Process Monitor
 
-> Mixin node process monitor tools.
+> Mixin Group process monitor tools.
 
 [![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
@@ -40,10 +40,17 @@ Invite Webhook and somebody who want to receive monitor message to a small group
 Copy `config.cfg.defaults` to `config.cfg` and change some varibles like this in the `config.cfg`.
 
 ``` bash
-SERVICE=Mixin
-PROCESS=7239
-PROCESS_NUM=1
-LOG_FILE=mixin_process.log
+SERVICE=MixinGroup
+PROCESS_NUM=2
+EXIN_PROCESS=exin
+EXINDCA_PROCESS=exindca
+EXINEARN_PROCESS=exinearn
+EXINPOOL_PROCESS=exinpool
+FCOIN_PROCESS=fcoin
+LOCALCN_PROCESS=localcn
+LOCALEN_PROCESS=localen
+LOCALD_PROCESS=locald
+LOG_FILE=group_process.log
 WEBHOOK_URL=https://webhook.exinwork.com/api/send?access_token
 ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 ```
@@ -51,16 +58,16 @@ ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 Add crontab like this in the server.
 
 ``` bash
-# Mixin node process monitor
-* * * * * cd /data/monitor/exinpool/Mixin/process && bash mixin_process.sh >> mixin_process.log &
+# Mixin grpup process monitor
+* * * * * cd /data/monitor/exinpool/Mixin/group && bash group_process.sh >> group_process.log &
 ```
 
-The crontab will run every minute then you can check the log in the `mixin_process.log`.
+The crontab will run every minute then you can check the log in the `group_process.log`.
 
 ## Features
 
-- Monitor Mixin node process
-- Send alarm message when node is abnormal
+- Monitor Mixin group process
+- Send alarm message when group process is abnormal
 - Send alarm message via Webhook which based on Mixin API
 
 ## Contributing
