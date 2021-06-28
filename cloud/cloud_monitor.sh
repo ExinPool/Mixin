@@ -22,7 +22,7 @@ access_token="$(config_get ACCESS_TOKEN)"
 
 for node in "${node_arr[@]}"
 do
-    connect=`nc -w 15 $node $port < /dev/null; echo $?`
+    connect=`nc -w 30 $node $port < /dev/null; echo $?`
     if [ ${connect} -eq 0 ]
     then
         log="`date '+%Y-%m-%d %H:%M:%S'` UTC `hostname` `whoami` INFO ${service} $node:$port status is normal."
