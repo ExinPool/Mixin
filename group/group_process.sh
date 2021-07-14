@@ -195,7 +195,6 @@ locald(){
     fi
 }
 
-exin
 exindca
 exinearn
 exinpool
